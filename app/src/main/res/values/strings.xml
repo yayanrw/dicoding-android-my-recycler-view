@@ -3,6 +3,7 @@
 
     <string name="heroes_name">Nama Pahlawan</string>
     <string name="description">Deskripsi</string>
+    <string name="list_of_heroes">List of Heroes</string>
     <string-array name="data_name">
         <item>Ahmad Dahlan</item>
         <item>Ahmad Yani</item>
