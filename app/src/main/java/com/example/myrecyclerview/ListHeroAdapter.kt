@@ -9,6 +9,15 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 class ListHeroAdapter(private val listHero: ArrayList<Hero>) : RecyclerView.Adapter<ListHeroAdapter.ListViewHolder>() {
+    private lateinit var onItemClickCallback: OnItemClickCallback
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+
+    interface OnItemClickCallback {
+        fun onItemClicked(data: Hero)
+    }
 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var imgPhoto: ImageView = itemView.findViewById(R.id.img_item_photo)
@@ -26,9 +35,10 @@ class ListHeroAdapter(private val listHero: ArrayList<Hero>) : RecyclerView.Adap
         holder.imgPhoto.setImageResource(photo)
         holder.tvName.text = name
         holder.tvDescription.text = description
-        holder.itemView.setOnClickListener {
-            Toast.makeText(holder.itemView.context, "Kamu memilih " + listHero[holder.adapterPosition].name, Toast.LENGTH_SHORT).show()
-        }
+        holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(listHero[holder.adapterPosition]) }
+//        holder.itemView.setOnClickListener {
+//            Toast.makeText(holder.itemView.context, "Kamu memilih " + listHero[holder.adapterPosition].name, Toast.LENGTH_SHORT).show()
+//        }
     }
 
     override fun getItemCount(): Int = listHero.size
